@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="税算寶">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob: 'unsafe-inline' 'unsafe-eval'; connect-src * http: https:; img-src * data: blob: http: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval';">
+<meta http-equiv="Content-Security-Policy" content="default-src * data: blob: 'unsafe-inline' 'unsafe-eval'; connect-src * http: https: ws: wss:; img-src * data: blob: http: https: file:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; font-src * data:;">
 <meta property="og:title" content="税算寶 - 全球税务计算器 | 7地区税率一键计算">
 <meta property="og:description" content="全球7地区税务计算器 — 中国🇨🇳美国🇺🇸英国🇬🇧澳洲🇦🇺加拿大🇨🇦日本🇯🇵香港🇭🇰">
 <meta property="og:type" content="website">
@@ -40,7 +40,7 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 .header-in{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px}
 .logo{font-size:24px;font-weight:900;color:var(--pri);white-space:nowrap;cursor:default}
 .logo span{font-size:20px}
-.hdr-btn{background:var(--card);border:1px solid var(--border);color:var(--dim);padding:6px 12px;border-radius:10px;cursor:pointer;font-size:13px;transition:all .2s;white-space:nowrap}
+.hdr-btn{background:var(--card);border:1px solid var(--border);color:var(--dim);padding:6px 12px;border-radius:10px;cursor:pointer;font-size:13px;transition:all .2s;white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
 .hdr-btn:hover{color:var(--txt);border-color:var(--pri)}
 .lang-dropdown{position:relative;display:inline-block}
 .lang-menu{display:none;position:absolute;top:110%;right:0;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;min-width:110px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
@@ -91,7 +91,7 @@ tr:last-child td{border-bottom:0}
 .payroll-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap}
 .payroll-row input{flex:1;min-width:80px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--txt);font-size:14px}
 .payroll-row button{background:var(--err);color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;font-size:16px;font-weight:700}
-@media(max-width:640px){.header-in{flex-wrap:wrap}.logo{font-size:20px}.tab{padding:8px 12px;font-size:13px}.result-grid{grid-template-columns:1fr}.result-item .value{font-size:18px}}
+@media(max-width:640px){.header-in{flex-wrap:nowrap;overflow:hidden}.logo{font-size:18px}.logo span{font-size:16px}.tab{padding:8px 12px;font-size:13px}.result-grid{grid-template-columns:1fr}.result-item .value{font-size:18px}.hdr-btn{padding:5px 8px;font-size:12px;max-width:80px}#dlBtn span{display:none}}
 .fr{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .fr input{flex:1;min-width:80px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--txt);font-size:14px}
 .badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700}

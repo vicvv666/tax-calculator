@@ -337,9 +337,9 @@ function updateUI(){
     var l=el.getAttribute('onclick').match(/'([^']+)'/)[1];
     el.classList.toggle('active',l===LANG);
   });
- const ub=document.getElementById('authBtn');
- if(user){ub.innerHTML='\ud83d\udc64 '+user.username}
- else{ub.innerHTML='\ud83d\udc64 '+t('login')}
+const ub=document.getElementById('authBtn');
+if(user){var uname=user.username.length>6?user.username.slice(0,6)+'…':user.username;ub.innerHTML='👤 '+uname;ub.title=user.username}
+else{ub.innerHTML='👤 '+t('login');ub.title=''}
   // Auth modal i18n
   var at=document.getElementById('authTitle');if(at)at.textContent=t('login');
  var lt=document.getElementById('showRegBtn');if(lt)lt.textContent=t('register');
