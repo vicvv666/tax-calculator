@@ -664,10 +664,11 @@ function renderPaymentModal(){
  html+='<button id="payTabWechat" onclick="switchPayTab(\'wechat\')" style="flex:1;padding:14px 8px;font-size:20px;font-weight:900;border-radius:14px;border:2px solid var(--border);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s">\u5fae\u4fe1<\/button>';
  html+='<button id="payTabPaypal" onclick="switchPayTab(\'paypal\')" style="flex:1;padding:14px 8px;font-size:20px;font-weight:900;border-radius:14px;border:2px solid var(--border);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s">PayPal<\/button>';
  html+='<\/div>';
- // QR code — open in external browser (reliable on all platforms)
+ // QR code — fetch as blob and display inline (works in APK WebView)
  html+='<div id="payQRBox" style="text-align:center;margin:16px auto">';
  html+='<p style="color:var(--dim);font-size:14px;margin-bottom:12px">'+t('upgradeHint')+'</p>';
- html+='<a id="payQRApi" href="'+API_BASE+'/api/qr/alipay" target="_blank" rel="noopener" style="display:block;width:100%;padding:20px 16px;font-size:20px;font-weight:900;border-radius:16px;border:2px solid var(--pri);background:var(--pri-dim);color:var(--pri);cursor:pointer;text-decoration:none;text-align:center;box-sizing:border-box">📱 '+t('scanQR')+'</a>';
+ html+='<img id="payQRImg" src="" style="width:80vw;max-width:400px;height:auto;border-radius:12px;border:3px solid var(--border);display:block;margin:0 auto;min-height:200px;background:var(--card)">';
+ html+='<a id="payQRFallback" href="" target="_blank" rel="noopener" style="display:none;margin-top:10px;padding:12px;font-size:16px;font-weight:700;border-radius:10px;border:1px solid var(--border);color:var(--pri);text-decoration:none">🔗 '+t('scanQR')+'</a>';
  html+='<p id="payAmtLabel" style="margin-top:14px;font-size:28px;font-weight:900;color:var(--pri)">¥19</p>';
  html+='<p id="payMethodLabel" style="color:var(--dim);font-size:18px;font-weight:700">\u652f\u4ed8\u5b9d\u626b\u7801\u4ed8\u6b3e</p>';
  html+='</div>';
@@ -676,6 +677,7 @@ function renderPaymentModal(){
  html+='<div id="payStatus" style="text-align:center;margin-top:8px;font-size:13px;color:var(--dim)"><\/div>';
  }
  document.getElementById('priceGrid').innerHTML=html;
+ loadQR('alipay');
 }
 var curPayMethod='alipay',curPlanType='monthly',payPollTimer=null;
 function switchPayTab(m){
@@ -686,9 +688,26 @@ function switchPayTab(m){
   var el=document.getElementById('payTab'+k.charAt(0).toUpperCase()+k.slice(1));
   if(el)el.style.cssText=k===m?as:is;
  });
- var qrA=document.getElementById('payQRApi');
+ var qrA=document.getElementById('payQRFallback');
  if(qrA)qrA.href=API_BASE+'/api/qr/'+m;
+ loadQR(m);
  updatePayAmount();
+}
+function loadQR(m){
+ var qrImg=document.getElementById('payQRImg');
+ var qrFallback=document.getElementById('payQRFallback');
+ if(!qrImg)return;
+ qrImg.src='';qrImg.style.opacity='0.3';
+ var url=API_BASE+'/api/qr/'+m;
+ fetch(url,{mode:'cors'}).then(function(r){return r.blob()}).then(function(blob){
+ var objUrl=URL.createObjectURL(blob);
+ qrImg.src=objUrl;qrImg.style.opacity='1';
+ if(qrFallback)qrFallback.style.display='none';
+ }).catch(function(){
+ // fallback: try direct src
+ qrImg.src=url;qrImg.style.opacity='1';
+ if(qrFallback){qrFallback.href=url;qrFallback.style.display='inline-block';}
+ });
 }
 function switchPlanTab(p){
  curPlanType=p;
