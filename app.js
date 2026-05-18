@@ -240,7 +240,7 @@ async function loadUser(){
   // Full fail — clear stale token
   token=null;localStorage.removeItem('tcp_token');updateUI();
 }
-function logout(){token=null;user=null;localStorage.removeItem('tcp_token');localStorage.removeItem('tcp_cred');updateUI();closeModal('authModal')}
+function doLogout(){token=null;user=null;localStorage.removeItem('tcp_token');localStorage.removeItem('tcp_cred');localStorage.removeItem('tcp_offline_user');closeModal('authModal');resetAuthModal();updateUI();toast(t('logout'),'ok')}
 function b64Enc(s){return btoa(unescape(encodeURIComponent(s)))}
 function b64Dec(s){try{return decodeURIComponent(escape(atob(s)))}catch(e){return''}}
 
@@ -537,11 +537,34 @@ function downloadCsv(csv,name){
 // ===== Modals =====
 function openModal(id){document.getElementById(id).classList.add('open')}
 function closeModal(id){document.getElementById(id).classList.remove('open')}
-function showAuth(){if(user)showUserModal();else openModal('authModal')}
+function showAuth(){
+ if(user){showUserModal();return}
+ resetAuthModal();
+ openModal('authModal');
+}
+function resetAuthModal(){
+ var l=document.getElementById('authLogin'),r=document.getElementById('authRegister');
+ if(!l)return;
+ // Restore login form HTML
+ l.innerHTML='<div class="fg"><label id="authUserLabel">'+t('username')+'</label><input id="authUser" type="text" autocomplete="username"></div>'+
+ '<div class="fg"><label id="authPassLabel">'+t('password')+'</label><input id="authPass" type="password" autocomplete="current-password"></div>'+
+ '<button class="btn btn-pri" style="width:100%;margin-bottom:10px" id="authLoginBtn" onclick="doLogin()">'+t('login')+'</button>'+
+ '<div style="text-align:center;margin-bottom:8px"><button class="btn btn-ghost" style="font-size:13px" id="showRegBtn" onclick="toggleAuth()">'+t('register')+'</button></div>';
+ l.style.display='block';
+ r.innerHTML='<div class="fg"><label id="regUserLabel">'+t('username')+'</label><input id="regUser" type="text" autocomplete="username"></div>'+
+ '<div class="fg"><label id="regPassLabel">'+t('password')+'</label><input id="regPass" type="password" autocomplete="new-password"></div>'+
+ '<button class="btn btn-pri" style="width:100%;margin-bottom:10px" id="authRegBtn" onclick="doRegister()">'+t('register')+'</button>'+
+ '<div style="text-align:center;margin-bottom:8px"><button class="btn btn-ghost" style="font-size:13px" id="showLoginBtn" onclick="toggleAuth()">'+t('login')+'</button></div>';
+ r.style.display='none';
+ document.getElementById('authTitle').textContent=t('login');
+}
 function toggleAuth(){
  var l=document.getElementById('authLogin'),r=document.getElementById('authRegister');
- if(l.style.display==='none'){l.style.display='block';r.style.display='none';document.getElementById('authTitle').textContent=t('login')}
- else{l.style.display='none';r.style.display='block';document.getElementById('authTitle').textContent=t('register')}
+ if(l.style.display==='none'){
+  resetAuthModal();
+ }else{
+  l.style.display='none';r.style.display='block';document.getElementById('authTitle').textContent=t('register');
+ }
 }
 function showUserModal(){
  document.getElementById('authTitle').textContent=t('account');
@@ -549,7 +572,9 @@ function showUserModal(){
  document.getElementById('authLogin').innerHTML=
  '<p style="margin:12px 0">'+t('username')+': <b>'+user.username+'<\/b> ('+t(m)+')<\/p>'+
  (m==='free'?'<button class="btn btn-pri" style="width:100%;margin:8px 0" onclick="closeModal(\'authModal\');showUpgrade()">\u2b06\ufe0f '+t('upgrade')+'<\/button>':'')+
- '<button class="btn btn-ghost" style="width:100%;color:var(--err);border-color:var(--err)" onclick="logout()">\ud83d\udeaa '+t('logout')+'<\/button>';
+ '<button class="btn btn-ghost" style="width:100%;color:var(--err);border-color:var(--err)" onclick="doLogout()">\ud83d\udeaa '+t('logout')+'<\/button>';
+ document.getElementById('authLogin').style.display='block';
+ document.getElementById('authRegister').style.display='none';
  openModal('authModal');
 }
 function showUpgrade(){
