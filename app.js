@@ -199,14 +199,14 @@ function offlineApi(url,opts){
  if(url==='/api/register'){
  var users=JSON.parse(localStorage.getItem('tcp_offline_users')||'{}');
  if(users[body.username])return{error:'Username already exists'};
- users[body.username]={password:body.password,membership:'pro',expires_at:'2027-12-31'};
+ users[body.username]={password:body.password,membership:'free',expires_at:null};
  localStorage.setItem('tcp_offline_users',JSON.stringify(users));
  // Queue for cloud sync
  var queue=JSON.parse(localStorage.getItem('tcp_sync_queue')||'[]');
  queue.push({type:'register',username:body.username,password:body.password});
  localStorage.setItem('tcp_sync_queue',JSON.stringify(queue));
  var fakeToken=btoa(JSON.stringify({sub:Date.now(),username:body.username,exp:'2027-12-31T23:59:59'}));
- return{ok:true,token:fakeToken,user:{id:Date.now(),username:body.username,membership:'pro',expires_at:'2027-12-31'}};
+ return{ok:true,token:fakeToken,user:{id:Date.now(),username:body.username,membership:'free',expires_at:null}};
  }
  // Offline login — check local first, then try cloud
  if(url==='/api/login'){
