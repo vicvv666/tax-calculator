@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<title>税算寶 - 全球税务计算器 | Global Tax Calculator | 所得税·增值税·房贷·薪资单</title>
+<meta name="description" content="税算寶 全球7地区税务计算器 — 中国·美国·英国·澳洲·加拿大·日本·香港。所得税、增值税/消费税、房贷月供、批量薪资单、年终奖最优计税、公积金、跨国税负对比，一站式专业计算工具。免费使用，Pro版解锁高级功能。">
+<meta name="keywords" content="tax calculator,全球税务计算器,所得税计算器,增值税计算,VAT GST calculator,mortgage calculator,房贷计算器,薪资单生成,年终奖计算,公积金计算,housing fund,跨国税务对比,income tax China US UK Australia Canada Japan Hong Kong,税算寶,个税计算,批量工资条">
+<meta name="author" content="税算寶">
+<meta name="theme-color" content="#0a0f1e">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="税算寶">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob: 'unsafe-inline' 'unsafe-eval'; connect-src * http: https:; img-src * data: blob: http: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval';">
+<meta property="og:title" content="税算寶 - 全球税务计算器 | 7地区税率一键计算">
+<meta property="og:description" content="全球7地区税务计算器 — 中国🇨🇳美国🇺🇸英国🇬🇧澳洲🇦🇺加拿大🇨🇦日本🇯🇵香港🇭🇰">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://taxcalc.pro/">
+<meta property="og:site_name" content="税算寶">
+<meta property="og:image" content="https://taxcalc.pro/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="税算寶 - 全球税务计算器">
+<meta name="twitter:description" content="7地区所得税·增值税·房贷·薪资单·年终奖·公积金·跨国对比">
+<link rel="canonical" href="https://taxcalc.pro/">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" href="/img/icon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"税算寶","url":"https://taxcalc.pro","description":"Global Tax Calculator — 7 regions income tax, VAT/GST, mortgage, payroll, bonus optimization, housing fund, cross-country tax comparison","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Pro","price":"2.88","priceCurrency":"USD","billingIncrement":"P1M"}],"featureList":["Income Tax Calculator - China, US, UK, Australia, Canada, Japan, Hong Kong","VAT/GST Calculator","Mortgage Calculator","Batch Payroll Generator","Year-end Bonus Tax Optimization","Housing Fund Calculator","Cross-country Tax Comparison","Calculation History & Export"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"税算寶","item":"https://taxcalc.pro/"},{"@type":"ListItem","position":2,"name":"Income Tax Calculator","item":"https://taxcalc.pro/#income"},{"@type":"ListItem","position":3,"name":"VAT/GST Calculator","item":"https://taxcalc.pro/#vat"},{"@type":"ListItem","position":4,"name":"Mortgage Calculator","item":"https://taxcalc.pro/#mortgage"}]}
+</script>
+<style>
+:root{--bg:#0a0f1e;--card:#111827;--card2:#162032;--pri:#10b981;--pri-dim:rgba(16,185,129,.12);--acc:#6366f1;--dim:#94a3b8;--txt:#f1f5f9;--border:rgba(148,163,184,.2);--err:#ef4444;--ok:#10b981;--warn:#f59e0b;--r:14px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;padding-bottom:72px;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 20%,rgba(16,185,129,.06),transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(99,102,241,.05),transparent 60%);pointer-events:none;z-index:0}
+.header{position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(10,15,30,.85);border-bottom:1px solid var(--border)}
+.header-in{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px}
+.logo{font-size:24px;font-weight:900;color:var(--pri);white-space:nowrap;cursor:default}
+.logo span{font-size:20px}
+.hdr-btn{background:var(--card);border:1px solid var(--border);color:var(--dim);padding:6px 12px;border-radius:10px;cursor:pointer;font-size:13px;transition:all .2s;white-space:nowrap}
+.hdr-btn:hover{color:var(--txt);border-color:var(--pri)}
+.lang-dropdown{position:relative;display:inline-block}
+.lang-menu{display:none;position:absolute;top:110%;right:0;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;min-width:110px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.lang-menu.open{display:block}
+.lang-menu button{display:block;width:100%;padding:10px 16px;background:0;border:0;color:var(--dim);cursor:pointer;text-align:left;font-size:14px}
+.lang-menu button:hover{background:var(--pri-dim);color:var(--pri)}
+.main{max-width:960px;margin:0 auto;padding:12px 16px;position:relative;z-index:1}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:10px 16px;border-radius:12px;background:var(--card);border:1px solid var(--border);color:var(--dim);cursor:pointer;font-size:14px;font-weight:600;white-space:nowrap;transition:all .25s;flex-shrink:0}
+.tab:hover{color:var(--txt);border-color:var(--pri)}
+.tab.active{background:var(--pri-dim);color:var(--pri);border-color:var(--pri);box-shadow:0 0 20px rgba(16,185,129,.15)}
+.sec{display:none;animation:fadeIn .3s}
+.sec.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:12px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:13px;font-weight:600;color:var(--dim);margin-bottom:4px}
+.fg input,.fg select{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--txt);font-size:15px;outline:0;transition:border .2s}
+.fg input:focus,.fg select:focus{border-color:var(--pri)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 20px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:1px solid transparent;transition:all .25s}
+.btn-pri{background:linear-gradient(135deg,var(--pri),#059669);color:#fff;box-shadow:0 4px 16px rgba(16,185,129,.3)}
+.btn-pri:hover{box-shadow:0 6px 24px rgba(16,185,129,.45);transform:translateY(-1px)}
+.btn-ghost{background:0;color:var(--dim);border-color:var(--border)}
+.btn-ghost:hover{color:var(--txt);border-color:var(--pri)}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.result-item{background:var(--card2);border-radius:10px;padding:12px 14px}
+.result-item .label{font-size:12px;color:var(--dim);margin-bottom:2px}
+.result-item .value{font-size:20px;font-weight:800;color:var(--pri)}
+.footer{position:fixed;bottom:0;left:0;right:0;z-index:100;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(10,15,30,.9);border-top:1px solid var(--border);padding:14px 16px;text-align:center;font-size:12px;color:var(--dim)}
+.footer a{color:var(--pri);cursor:pointer;text-decoration:underline}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;max-width:420px;width:92%;max-height:90vh;overflow-y:auto;box-shadow:0 16px 64px rgba(0,0,0,.5);animation:fadeIn .25s}
+.modal h3{font-size:20px;font-weight:800;margin-bottom:16px;color:var(--pri)}
+.toast-box{position:fixed;top:70px;right:16px;z-index:300;display:flex;flex-direction:column;gap:6px}
+.toast{padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;animation:slideIn .3s;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+@keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.toast.ok{background:rgba(16,185,129,.15);color:var(--ok);border:1px solid rgba(16,185,129,.3)}
+.toast.err{background:rgba(239,68,68,.15);color:var(--err);border:1px solid rgba(239,68,68,.3)}
+.toast.warn{background:rgba(245,158,11,.15);color:var(--warn);border:1px solid rgba(245,158,11,.3)}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
+th{color:var(--dim);font-weight:600;font-size:12px}
+td{color:var(--txt)}
+tr:last-child td{border-bottom:0}
+.compare-highlight{color:var(--pri);font-weight:800}
+.payroll-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap}
+.payroll-row input{flex:1;min-width:80px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--txt);font-size:14px}
+.payroll-row button{background:var(--err);color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;font-size:16px;font-weight:700}
+@media(max-width:640px){.header-in{flex-wrap:wrap}.logo{font-size:20px}.tab{padding:8px 12px;font-size:13px}.result-grid{grid-template-columns:1fr}.result-item .value{font-size:18px}}
+.fr{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fr input{flex:1;min-width:80px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--txt);font-size:14px}
+.badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700}
+.badge-pro{background:var(--pri-dim);color:var(--pri)}
+.badge-free{background:rgba(148,163,184,.15);color:var(--dim)}
+.btn-dan{background:rgba(239,68,68,.15);color:var(--err);border-color:rgba(239,68,68,.3)}
+.btn-dan:hover{background:rgba(239,68,68,.25)}
+.btn-acc{background:var(--pri-dim);color:var(--acc);border-color:rgba(99,102,241,.3)}
+.ptbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.ptbl th,.ptbl td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
+.ptbl th{color:var(--dim);font-weight:600;font-size:12px}
+.ptbl td{color:var(--txt)}
+.ptbl tr.tot td{font-weight:800;color:var(--pri);border-top:2px solid var(--pri)}
+.result{margin-top:14px}
+.r-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)}
+.r-lbl{color:var(--dim);font-size:13px}
+.r-val{font-weight:700;font-size:15px}
+.r-big{font-size:24px;font-weight:900;color:var(--pri)}
+.lbl{font-size:12px;color:var(--dim)}
+.num{font-weight:700;color:var(--txt)}
+</style>
+</head>
+<body>
+
+<header class="header"><div class="header-in">
+<div class="logo" role="banner">🧮 <span id="brandName"></span></div>
+<div style="display:flex;gap:8px;align-items:center">
+<button class="hdr-btn" id="dlBtn" onclick="window.open('/download/税算寶.apk','_blank')" style="background:var(--pri-dim);border-color:rgba(16,185,129,.3);color:var(--pri);font-weight:700" aria-label="Download APK">📥 <span id="dlBtnText">APK</span></button>
+<div class="lang-dropdown">
+<button class="hdr-btn" id="langBtn" onclick="toggleLangDropdown()" aria-label="Change language">🌐</button>
+<div class="lang-menu" id="langMenu" role="menu">
+<button onclick="setLang('en')" role="menuitem">English</button>
+<button onclick="setLang('zh-TW')" role="menuitem">繁體中文</button>
+<button onclick="setLang('zh-CN')" role="menuitem">简体中文</button>
+</div>
+</div>
+<button class="hdr-btn" id="authBtn" onclick="showAuth()" style="color:var(--pri);border-color:rgba(16,185,129,.3)">👤</button>
+</div>
+</div></header>
+
+<div class="main">
+<div class="tabs" id="tabBar" role="tablist"></div>
+<div id="appArea"></div>
+</div>
+
+<div class="footer"><span id="footerTxt"></span> | <a onclick="openModal('discModal')"><span id="discClick"></span></a> | <a onclick="openModal('privacyModal')"><span id="privacyLink">Privacy</span></a> | <a onclick="openModal('termsModal')"><span id="termsLink">Terms</span></a><br><a href="mailto:vichoo2020@gmail.com" style="color:var(--acc)">📧 vichoo2020@gmail.com</a></div>
+
+<div class="toast-box" id="toastBox"></div>
+
+<!-- Auth Modal -->
+<div class="modal-overlay" id="authModal">
+<div class="modal">
+<h3 id="authTitle">Login</h3>
+<div id="authLogin">
+<div class="fg"><label id="authUserLabel">Username</label><input id="authUser" type="text" autocomplete="username"></div>
+<div class="fg"><label id="authPassLabel">Password</label><input id="authPass" type="password" autocomplete="current-password"></div>
+<button class="btn btn-pri" style="width:100%;margin-bottom:10px" id="authLoginBtn" onclick="doLogin()">Login</button>
+<div style="text-align:center;margin-bottom:8px"><button class="btn btn-ghost" style="font-size:13px" id="showRegBtn" onclick="toggleAuth()">Register</button></div>
+</div>
+<div id="authRegister" style="display:none">
+<div class="fg"><label id="regUserLabel">Username</label><input id="regUser" type="text" autocomplete="username"></div>
+<div class="fg"><label id="regPassLabel">Password</label><input id="regPass" type="password" autocomplete="new-password"></div>
+<button class="btn btn-pri" style="width:100%;margin-bottom:10px" id="authRegBtn" onclick="doRegister()">Register</button>
+<div style="text-align:center;margin-bottom:8px"><button class="btn btn-ghost" style="font-size:13px" id="showLoginBtn" onclick="toggleAuth()">Login</button></div>
+</div>
+<button class="btn btn-ghost" style="width:100%" onclick="closeModal('authModal')">✕</button>
+</div>
+</div>
+
+<!-- Price Modal -->
+<div class="modal-overlay" id="priceModal">
+<div class="modal">
+<h3 id="priceTitle">Upgrade</h3>
+<div id="priceGrid"></div>
+<button class="btn btn-ghost" style="width:100%;margin-top:10px" onclick="closeModal('priceModal')">✕</button>
+</div>
+</div>
+
+<!-- Disclaimer Modal -->
+<div class="modal-overlay" id="discModal">
+<div class="modal">
+<h3 id="discTitle">Disclaimer</h3>
+<p id="discText" style="font-size:13px;line-height:1.8;color:var(--dim)"></p>
+<button class="btn btn-ghost" style="width:100%;margin-top:12px" onclick="closeModal('discModal')">✕</button>
+</div>
+</div>
+
+<!-- Privacy Modal -->
+<div class="modal-overlay" id="privacyModal">
+<div class="modal">
+<h3 id="privacyTitle" style="color:var(--acc)">Privacy Policy</h3>
+<p id="privacyText" style="font-size:13px;line-height:1.8;color:var(--dim)"></p>
+<button class="btn btn-ghost" style="width:100%;margin-top:12px" onclick="closeModal('privacyModal')">✕</button>
+</div>
+</div>
+
+<!-- Terms Modal -->
+<div class="modal-overlay" id="termsModal">
+<div class="modal">
+<h3 id="termsTitle" style="color:var(--acc)">Terms of Service</h3>
+<p id="termsText" style="font-size:13px;line-height:1.8;color:var(--dim)"></p>
+<button class="btn btn-ghost" style="width:100%;margin-top:12px" onclick="closeModal('termsModal')">✕</button>
+</div>
+</div>
+
+<!-- Payroll Detail Modal -->
+<div class="modal-overlay" id="payrollDetailModal">
+<div class="modal" style="max-width:520px">
+<h3 id="pdTitle">Payroll Detail</h3>
+<div id="pdContent"></div>
+<button class="btn btn-ghost" style="width:100%;margin-top:10px" onclick="closeModal('payrollDetailModal')">✕</button>
+</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
