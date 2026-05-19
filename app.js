@@ -205,7 +205,7 @@ return new Promise(function(resolve){
  xhr.open(method,fullUrl,true);
  var hdrs=Object.assign({'Origin':'https://vicvv666.github.io'},opts.headers);
  Object.keys(hdrs).forEach(function(k){try{xhr.setRequestHeader(k,hdrs[k])}catch(e){}});
- xhr.timeout=8000;
+ xhr.timeout=5000;
  xhr.onload=function(){
  IS_OFFLINE=false;
  try{var data=JSON.parse(xhr.responseText);resolve(data)}
@@ -835,8 +835,16 @@ function toast(msg,cls){
 // ===== Init =====
 if(typeof cordova!=='undefined'){
  document.addEventListener('deviceready',function(){
- // Configure native HTTP plugin
- try{cordova.plugins.http.setDataSerializer('json');cordova.plugins.http.setHeader('*','Accept','application/json')}catch(e){}
+ // Configure native HTTP plugin for speed
+ try{
+ cordova.plugins.http.setDataSerializer('json');
+ cordova.plugins.http.setHeader('*','Accept','application/json');
+ cordova.plugins.http.setRequestTimeout(5.0);
+ cordova.plugins.http.setConnectTimeout(3.0);
+ cordova.plugins.http.setReadTimeout(5.0);
+ // Warm up DNS + TLS by hitting health endpoint early
+ cordova.plugins.http.get(API_BASE+'/api/health',{},{},function(){},function(){});
+ }catch(e){}
  updateUI();loadUser();
  },false);
 }else{
